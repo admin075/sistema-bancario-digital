@@ -1,0 +1,45 @@
+<div class="emprestimo-container">
+  <div class="emprestimo-form">
+    <h2>Solicitar Empréstimo</h2>
+    <form (ngSubmit)="onSubmit()" #emprestimoForm="ngForm">
+      <div class="form-group">
+        <label for="valor">Valor do Empréstimo:</label>
+        <input type="number" id="valor" [(ngModel)]="emprestimo.valor" name="valor" required min="1000" max="100000">
+      </div>
+      
+      <div class="form-group">
+        <label for="parcelas">Número de Parcelas:</label>
+        <select id="parcelas" [(ngModel)]="emprestimo.numeroParcelas" name="parcelas">
+          <option value="6">6 parcelas</option>
+          <option value="12">12 parcelas</option>
+          <option value="18">18 parcelas</option>
+          <option value="24">24 parcelas</option>
+          <option value="36">36 parcelas</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="finalidade">Finalidade:</label>
+        <select id="finalidade" [(ngModel)]="emprestimo.finalidade" name="finalidade" required>
+          <option value="">Selecione...</option>
+          <option value="pessoal">Uso Pessoal</option>
+          <option value="carro">Compra de Veículo</option>
+          <option value="casa">Financiamento Imobiliário</option>
+          <option value="educacao">Educação</option>
+          <option value="negocio">Negócio</option>
+        </select>
+      </div>
+      
+      <div class="info-box" *ngIf="emprestimo.valor > 0">
+        <p><strong>Simulação:</strong></p>
+        <p>Taxa de Juros: 2% ao mês</p>
+        <p>Valor Total: {{emprestimo.valor + calcularJuros() | currency:'BRL'}}</p>
+        <p>Valor da Parcela: {{(emprestimo.valor + calcularJuros()) / emprestimo.numeroParcelas | currency:'BRL'}}</p>
+      </div>
+      
+      <button type="submit" [disabled]="!emprestimoForm.form.valid">Solicitar Empréstimo</button>
+    </form>
+    
+    <button routerLink="/dashboard-cliente" class="back-btn">Voltar ao Dashboard</button>
+  </div>
+</div>
