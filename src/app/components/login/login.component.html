@@ -1,0 +1,28 @@
+<div class="login-container">
+  <div class="login-form">
+    <h2>Login - Sistema Bancário Digital</h2>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="credentials.email" name="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" [(ngModel)]="credentials.password" name="password" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="userType">Tipo de Usuário:</label>
+        <select id="userType" [(ngModel)]="credentials.userType" name="userType">
+          <option value="cliente">Cliente</option>
+          <option value="gerente">Gerente</option>
+        </select>
+      </div>
+      
+      <button type="submit" [disabled]="!loginForm.form.valid">Entrar</button>
+    </form>
+    
+    <p><a routerLink="/cadastro-cliente">Não tem conta? Cadastre-se</a></p>
+  </div>
+</div>
